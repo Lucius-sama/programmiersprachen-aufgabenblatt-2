@@ -62,11 +62,19 @@ Vec2 operator*(Vec2 const& u, float s) {
 
 Vec2 operator/(Vec2 const& u, float s) {
     Vec2 temp{ u };
-    temp /= s;
+    if (s == 0.0) {
 
-    return temp;
+        std::cout << "You cant divide by Zero\n";
+
+        return temp;
+    }
+    else
+    {
+        temp /= s;
+
+        return temp;
+    }
 }
-
 Vec2 operator*(float s, Vec2 const& v) {
     Vec2 temp{ v };
     temp *= s;
