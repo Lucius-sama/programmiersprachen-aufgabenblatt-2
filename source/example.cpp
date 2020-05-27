@@ -2,6 +2,11 @@
 #include <GLFW/glfw3.h>
 #include <utility>
 #include <cmath>
+#include "rect.hpp"
+#include "circle.hpp"
+#include "color.hpp"
+#include <vector>
+
 
 
 int main(int argc, char* argv[])
@@ -53,6 +58,38 @@ int main(int argc, char* argv[])
     win.draw_text(text_offset_x, text_offset_y, font_size, display_text);
 
     win.update();
+
+    Vec2 x{ 10.0, 20.0 };
+    Vec2 y{ 60.0, 70.0 };
+    Vec2 z{ 200.0, 200.0 };
+
+    Color blau{ 0.0f, 0.0f, 1.0f };
+    Color gruen{ 0.0f, 1.0f, 0.0f };
+    Color rot{ 1.0f, 0.0f, 0.0f };
+
+    std::vector<Rect> rec_vector;
+    std::vector<Circle> circ_vector;
+
+    Rect rec{ x, y, gruen };
+    rec_vector.push_back(rec);
+    rec.draw(win, 0.5f);
+
+    Circle c{ z, 100.0, blau };
+    circ_vector.push_back(c);
+    c.draw(win, 2.0f);
+
+    Rect rec{ z, x, rot };
+    rec_vector.push_back(rec);
+    rec.draw(win, 1.0f);
+
+    Vec2 pos{ mouse_position.first, mouse_position.second };
+    if (rec.is_inside(pos) == true) {
+        rec.draw(win, 2.0f);
+    }
+    if (c.is_inside(pos) == true) {
+        c.draw(win, 5.0f);
+    }
+    
   }
 
   return 0;

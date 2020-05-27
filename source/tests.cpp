@@ -140,8 +140,8 @@ TEST_CASE("mat2", "[neo]")
 
         Mat2 b = { 2.1f, 3.1f, 1.0f, 4.3f };
         REQUIRE(b.e_00 == Approx(2.1f));
-        REQUIRE(b.e_10 == Approx(3.1f));
-        REQUIRE(b.e_01 == Approx(1.0f));
+        REQUIRE(b.e_10 == Approx(1.0f));
+        REQUIRE(b.e_01 == Approx(3.1f));
         REQUIRE(b.e_11 == Approx(4.3f));
     }
     SECTION("test mat mult", "[neos_nightmare]")
@@ -155,8 +155,8 @@ TEST_CASE("mat2", "[neo]")
         x *= w;
 
         REQUIRE(x.e_00 == Approx(-2.0f));
-        REQUIRE(x.e_10 == Approx(-3.0f));
-        REQUIRE(x.e_01 == Approx(4.0f));
+        REQUIRE(x.e_10 == Approx(-8.0f));
+        REQUIRE(x.e_01 == Approx(1.5f));
         REQUIRE(x.e_11 == Approx(7.5f));
         /*
                 w *= v;
@@ -228,7 +228,7 @@ TEST_CASE("color", "[farbe]")
     } 
     
     
-
+    
 int main(int argc, char* argv[])
 {
     return Catch::Session().run(argc, argv);

@@ -8,16 +8,6 @@ add_executable(example
   rect.cpp
   circle.cpp
   )
-# Build Program
-add_executable(program
-  window.cpp
-  glew.c
-  vec2.cpp
-  mat2.cpp
-  rect.cpp
-  circle.cpp
-)
-
 target_link_libraries(example
   glfw
   ${GLFW_LIBRARIES}
