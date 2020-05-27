@@ -3,13 +3,15 @@
 #include "circle.hpp"
 
 
-float Circle::circumference() {
+float Circle::circumference() 
+{
     float umf = 2 * M_PI * radius_;
 
     return umf;
 }
 
-void Circle::draw(Window const& a, float staerke) const {
+void Circle::draw(Window const& a, float staerke) const 
+{
     for (int i = 0; i < 360; ++i) {
 
         float x = i * M_PI / 180.0;
@@ -20,9 +22,11 @@ void Circle::draw(Window const& a, float staerke) const {
     return;
 }
 
-bool Circle::is_inside(Vec2 const& v) {
+bool Circle::is_inside(Vec2 const& v) 
+{
     float rad = sqrt(pow((v.x - center_.x), 2) + pow((v.y - center_.y), 2));
-    if (rad < radius_) {
+    while (rad < radius_) 
+    {
         return true;
     }
     return false;

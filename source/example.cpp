@@ -78,9 +78,9 @@ int main(int argc, char* argv[])
     circ_vector.push_back(c);
     c.draw(win, 2.0f);
 
-    Rect rec{ z, x, rot };
-    rec_vector.push_back(rec);
-    rec.draw(win, 1.0f);
+    Rect rec2{ z, x, rot };
+    rec_vector.push_back(rec2);
+    rec2.draw(win, 1.0f);
 
     Vec2 pos{ mouse_position.first, mouse_position.second };
     if (rec.is_inside(pos) == true) {
@@ -88,6 +88,9 @@ int main(int argc, char* argv[])
     }
     if (c.is_inside(pos) == true) {
         c.draw(win, 5.0f);
+    }
+    if (rec2.is_inside(pos) == true) {
+        rec2.draw(win, 3.0f);
     }
     
   }

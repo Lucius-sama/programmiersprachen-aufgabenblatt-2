@@ -158,28 +158,7 @@ TEST_CASE("mat2", "[neo]")
         REQUIRE(x.e_10 == Approx(-8.0f));
         REQUIRE(x.e_01 == Approx(1.5f));
         REQUIRE(x.e_11 == Approx(7.5f));
-        /*
-                w *= v;
-
-                REQUIRE(w.e_00 == Approx(5.0f));
-                REQUIRE(w.e_10 == Approx(3.0f));
-                REQUIRE(w.e_01 == Approx(8.0f));
-                REQUIRE(w.e_11 == Approx(2.0f));
-
-                y *= w;
-
-                REQUIRE(y.e_00 == Approx(0.0f));
-                REQUIRE(y.e_10 == Approx(0.0f));
-                REQUIRE(y.e_01 == Approx(0.0f));
-                REQUIRE(y.e_11 == Approx(0.0f));
-
-                z *= w;
-
-                REQUIRE(z.e_00 == Approx(-5.0f));
-                REQUIRE(z.e_10 == Approx(-3.0f));
-                REQUIRE(z.e_01 == Approx(-8.0f));
-                REQUIRE(z.e_11 == Approx(-2.0f));
-                */
+        
     }
 }
 TEST_CASE("color", "[farbe]")
@@ -196,36 +175,39 @@ TEST_CASE("color", "[farbe]")
         REQUIRE(green.b == 0.0);
     }
 }
+TEST_CASE("rect") 
+{
+    Vec2 v1{ 1.0, 2.0 };
+    Vec2 v2{ 4.5, 8.0 };
+    Vec2 v3{ 3.5, 6.5 };
 
-    TEST_CASE("rect") 
-    {
-        Vec2 v1{ 1.0, 2.0 };
-        Vec2 v2{ 4.5, 8.0 };
-        Vec2 v3{ 3.5, 6.5 };
+    Color clr;
 
-        Color clr;
+    Rect rec{ v1, v2, clr };
+    REQUIRE(rec.circumference() == Approx(50.0));
+    REQUIRE(rec.is_inside(v3) == true);
+    REQUIRE(rec.is_inside(v1) == false);
+}
 
-        Rect rec{ v1, v2, clr };
-        REQUIRE(rec.circumference() == Approx(50.0));
-        REQUIRE(rec.is_inside(v3) == true);
-        REQUIRE(rec.is_inside(v1) == false);
-    }
+TEST_CASE("cirlce", "[circ]") 
+{
 
-    TEST_CASE("cirlce", "[circ]") {
-        Vec2 ctr{ 4.0, 4.0 };
-        Vec2 v1{ 5.5, 8.0 };
-        Vec2 v2{ 20.0, 4.0 };
-        float rad = 5.0;
-        Color clr;
-        Circle circ{ ctr, rad, clr };
-        REQUIRE(circ.circumference() == Approx(31.416));
-        REQUIRE(circ.is_inside(v1) == true);
-        REQUIRE(circ.is_inside(v2) == false);
-    }
+    Vec2 ctr{ 2.0f, 2.0f };
+    Vec2 v1{ 3.5f, 1.0f };
+    Vec2 v2{ 40.0f, 8.0f };
+    float rad = 10.0f;
+    Color clr;
+    Circle circ{ ctr, rad, clr };
 
-    TEST_CASE("circle", "[circle]") {
+    REQUIRE(circ.circumference() == Approx(62.83185f));
+    REQUIRE(circ.is_inside(v1) == true);
+    REQUIRE(circ.is_inside(v2) == false);
+}
 
-    } 
+TEST_CASE("circle", "[circle]") 
+{
+
+} 
     
     
     
