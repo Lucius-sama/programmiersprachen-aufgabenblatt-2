@@ -2,6 +2,9 @@
 #include <catch.hpp>
 #include "vec2.hpp"
 #include "mat2.hpp"
+#include "color.hpp"
+#include "circle.hpp"
+#include "rect.hpp"
 
 TEST_CASE("vec2", "[Vec2]") 
 {
@@ -127,7 +130,7 @@ TEST_CASE("vec2", "[Vec2]")
 
 TEST_CASE("mat2", "[neo]")
 {
-    SECTION("test init") 
+    SECTION("test init")
     {
         Mat2 a = {};
         REQUIRE(a.e_00 == Approx(1.0f));
@@ -143,11 +146,88 @@ TEST_CASE("mat2", "[neo]")
     }
     SECTION("test mat mult", "[neos_nightmare]")
     {
-       
-        }   
-    
-    
+        Mat2 v;
+        Mat2 w{ 2.0f, 1.5f, 4.0f, 1.5f };
+        Mat2 x{ -1.0f, 0.0f, 0.0f, 1.0f };
+        Mat2 y{ 5.0f, 3.2f, 9.0f, 0.0f };
+        Mat2 z{ 7.0f, -2.0f, 5.0f, -1.0f };
+
+        x *= w;
+
+        REQUIRE(x.e_00 == Approx(-2.0f));
+        REQUIRE(x.e_10 == Approx(-3.0f));
+        REQUIRE(x.e_01 == Approx(4.0f));
+        REQUIRE(x.e_11 == Approx(7.5f));
+        /*
+                w *= v;
+
+                REQUIRE(w.e_00 == Approx(5.0f));
+                REQUIRE(w.e_10 == Approx(3.0f));
+                REQUIRE(w.e_01 == Approx(8.0f));
+                REQUIRE(w.e_11 == Approx(2.0f));
+
+                y *= w;
+
+                REQUIRE(y.e_00 == Approx(0.0f));
+                REQUIRE(y.e_10 == Approx(0.0f));
+                REQUIRE(y.e_01 == Approx(0.0f));
+                REQUIRE(y.e_11 == Approx(0.0f));
+
+                z *= w;
+
+                REQUIRE(z.e_00 == Approx(-5.0f));
+                REQUIRE(z.e_10 == Approx(-3.0f));
+                REQUIRE(z.e_01 == Approx(-8.0f));
+                REQUIRE(z.e_11 == Approx(-2.0f));
+                */
+    }
 }
+TEST_CASE("color", "[farbe]")
+{
+    SECTION("init")
+    {
+        Color c;
+        Color green{ 0.0, 1.0, 0.0 };
+        REQUIRE(c.r == 0.5);
+        REQUIRE(c.g == 0.5);
+        REQUIRE(c.b == 0.5);
+        REQUIRE(green.r == 0.0);
+        REQUIRE(green.g == 1.0);
+        REQUIRE(green.b == 0.0);
+    }
+}
+
+    TEST_CASE("rect") 
+    {
+        Vec2 v1{ 1.0, 2.0 };
+        Vec2 v2{ 4.5, 8.0 };
+        Vec2 v3{ 3.5, 6.5 };
+
+        Color clr;
+
+        Rect rec{ v1, v2, clr };
+        REQUIRE(rec.circumference() == Approx(50.0));
+        REQUIRE(rec.is_inside(v3) == true);
+        REQUIRE(rec.is_inside(v1) == false);
+    }
+
+    TEST_CASE("cirlce", "[circ]") {
+        Vec2 ctr{ 4.0, 4.0 };
+        Vec2 v1{ 5.5, 8.0 };
+        Vec2 v2{ 20.0, 4.0 };
+        float rad = 5.0;
+        Color clr;
+        Circle circ{ ctr, rad, clr };
+        REQUIRE(circ.circumference() == Approx(31.416));
+        REQUIRE(circ.is_inside(v1) == true);
+        REQUIRE(circ.is_inside(v2) == false);
+    }
+
+    TEST_CASE("circle", "[circle]") {
+
+    } 
+    
+    
 
 int main(int argc, char* argv[])
 {
